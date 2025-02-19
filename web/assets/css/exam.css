@@ -1,0 +1,66 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jun 10, 2023, 2:26:21 PM
+    Author     : admin
+*/
+
+.exam {
+    margin-bottom: 100px; 
+    display: flex; 
+    justify-content: space-around;
+}
+
+.content_exam {
+    flex: 2;
+}
+
+.question {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.menu_exam {
+    flex: 1; 
+    display: flex;
+}
+
+.number_question {
+    padding: 8px 12px;
+    border: 1px solid black;
+    margin-right: 4px;
+}
+
+.forcus {
+    background-color: rgb(234, 188, 101);
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0,0, 0, 0.4);
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+.modal.open {
+    display: flex;
+}
+
+.modal-container {
+    width: 900px;
+    min-height: 200px;
+    background-color: #fff;
+    position: relative;
+    /* de cua so modal co the co gian theo website */
+    max-width: calc(100% - 32px);
+    /* Ket hop voi keyframe de tao hieu ung */
+    animation: modalFadeIn ease 0.5s;
+    background-color: rgb(239, 216, 185);
+}

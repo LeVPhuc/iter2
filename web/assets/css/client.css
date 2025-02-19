@@ -1,0 +1,227 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Feb 27, 2023, 9:03:29 PM
+    Author     : admin
+*/
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style-type: none;
+
+}
+
+li {
+    padding: 10px 0;
+}
+
+a {
+    text-decoration: none;
+    color: black
+}
+
+
+.header {
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    background-color: white;
+}
+
+.header_logo {
+    width: 150px;
+    height: 150px;
+}
+
+.header_logo img {
+    width: 100%;
+}
+
+.header_search, .header_signup, .header_login, .header_cart, .header_main {
+    align-self: center;
+    margin-left: 10px;
+}
+
+.input-search {
+    width: 400px;
+}
+
+.input-search, .submit-search {
+    padding: 8px;
+    border-color: transparent;
+    background-color: rgb(241, 239, 234);
+}
+
+.submit-search, .header_signup, .header_login, .header_cart {
+    cursor: pointer;
+}
+
+.content {
+    margin-top: 150px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.side_bar {
+    width: 15%;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    height: 100%;
+}
+
+.side_bar ul {
+    border-radius: 8px;
+}
+
+.side_bar p {
+    background-color: #505050;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.menu {
+    margin-bottom: 12px;
+    height: 50vh;
+}
+
+.category_item, .price_item {
+    border-bottom: 1px solid rgb(222, 210, 210);
+}
+
+.category_item a {
+    display: block;
+    padding:0 8px;
+}
+
+.price_item a {
+    display: block;
+    padding:0 8px;
+}
+
+.list_product {
+    width: 80%;
+}
+
+.product {
+    margin-bottom: 16px;
+}
+
+.col-md-4 img {
+    width: 100%;
+}
+
+.img_order {
+    position: relative;
+}
+
+.order_text {
+    display: none;
+}
+
+.order {
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    right: 0;
+    background-color: rgba(26, 0, 12, 0.3);
+    color: rgba(26, 0, 12, 0.3);
+    display: flex;
+    justify-content: space-around;
+    padding: 6px 0;
+    /*animation: myAnimation linear 0.5s;*/
+}
+
+.order .order_content {
+    color: white;
+    font-weight: 12px;
+    font-size: 14px;
+    align-self: center;
+}
+
+.order_btn {
+    background-color: rgb(100, 92, 92);
+    padding: 8px 12px 8px 12px;
+    border-radius: 8px;
+    color: white;
+}
+
+.order_btn:hover {
+    background-color: rgb(91, 91, 219);
+}
+
+.product:hover .order_text {
+    display: block;
+}
+
+.product-item-content {
+    background-color: rgb(210, 198, 198);
+    margin-top: -4px;
+    padding: 8px;
+}
+
+.product-item-name {
+    margin-bottom: 4px;
+    margin-left: 8px;
+}
+
+.product-item-price {
+    margin-top: 4px;
+    color: red;
+    margin-left: 8px;
+}
+
+.footer {
+    background-color: rgb(95, 85, 85);
+    display: flex;
+    justify-content: space-around;
+    padding: 20px 0;
+    margin-top: 20px;
+    color: white;
+}
+
+.paging {
+    text-align: center;
+    margin-top: 12px;
+}
+
+.paging a {
+    transition: background-color .3s;
+    padding: 8px;
+}
+
+.active {
+    background-color: dodgerblue;
+    color: white;
+}
+.btn_prev, .btn_next {
+    cursor: pointer;
+    display: none;
+}
+
+.footer p {
+    margin: 10px 0;
+}
+
+
+
+@keyframes myAnimation {
+    from {
+        bottom: 0;
+    }
+
+    to {
+        bottom: 46.4px;
+    }
+}

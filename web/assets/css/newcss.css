@@ -1,0 +1,72 @@
+.avatarr {
+  display: flex;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.avatarr img {
+
+}
+
+.dropdown-ofme {
+    display: block;
+    position: absolute;
+    background-color: #11101d;
+    top: 100%;
+    right: 3%;
+    border-radius: 8px;
+    z-index: 1;
+}
+
+.quote {
+    margin: -25px;
+    width: 227px;
+}
+
+.quote:before {
+  content: "";
+  position: absolute;
+  bottom: 185px;
+  left: 200px;
+  border-top: 10px solid #11101d;
+  border-right: 10px solid transparent;
+  border-left: 10px solid transparent;
+  rotate: 180deg
+}
+
+
+.nav-dropdown {
+  display: block;
+}
+
+.dropdown-i {
+  display: flex;
+  list-style: none;
+  padding: 10px;
+  color: white;
+  font-size: 14px;
+}
+
+.dropdown-i .avatarr img{
+  height:3em;
+  width: 3em;
+}
+
+#d-name{
+  margin-bottom: 0;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 0 10px;
+
+}
+
+#role{
+  margin-bottom: 0;
+  padding: 0 10px;
+  font-size: 12px;
+  color:gray
+}
+
+.show{
+  display: none;
+}
