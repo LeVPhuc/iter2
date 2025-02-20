@@ -38,25 +38,29 @@
                     <div class="menu">
                         <p>Danh mục khóa học</p>
                         <ul>
-                            <%while (rsCourseCategory.next()) {%>
-                            <li class="category_item"><a href="ClientControlller?service=searchCname&cname=<%=rsCourseCategory.getInt("id")%>"><%=rsCourseCategory.getString("categoryName")%></a></li>
+                            <li><a href="getListCourse">Tất cả</a></li>
+                                <%while (rsCourseCategory.next()) {%>
+                            <li class="category_item"><a href="getListCourse?coursecategory=<%=rsCourseCategory.getInt("id")%>"><%=rsCourseCategory.getString("categoryName")%></a></li>
                                 <%}%>
                         </ul>
                     </div>
                 </div>
                 <div class="list_product row col-10">
-                    <%while (rsCourse.next()) {%>
+                    <% if (rsCourse != null && rsCourse.isBeforeFirst()) {
+                        while (rsCourse.next()) {%>
                     <div class="col-md-3">
                         <div class="product-item">
                             <div class="product-item-content">
                                 <img src="<%=request.getContextPath() + "/" + rsCourse.getString("image")%>"/>
-                                <p><%=request.getContextPath()%></p>
                                 <p class="product-item-name"><%=rsCourse.getString("courseName")%></p>
                                 <p class="product-item-name">Số buổi học: <%=rsCourse.getString("numberLesson")%></p>
                                 <a href="updateCourse?courseId=<%=rsCourse.getInt("id")%>">Cập nhật</a>
                             </div>
                         </div>
                     </div>
+                    <%}
+                    } else {%>
+                    <div>Không có dữ liệu</div>
                     <%}%>
                 </div>
             </div>

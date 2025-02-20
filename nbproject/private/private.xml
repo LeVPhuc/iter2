@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Code%20Java%20Intellij/iter2/src/conf/MANIFEST.MF</file>
-            <file>file:/E:/Code%20Java%20Intellij/iter2/web/META-INF/context.xml</file>
+            <file>file:/E:/Code%20Java%20netbeans/SpSWP/src/java/controller/Course/InsertCourse.java</file>
+            <file>file:/E:/Code%20Java%20netbeans/SpSWP/web/update.jsp</file>
+            <file>file:/E:/Code%20Java%20netbeans/SpSWP/src/java/dao/CourseDao.java</file>
+            <file>file:/E:/Code%20Java%20netbeans/SpSWP/src/java/controller/Course/UpdateCourse.java</file>
         </group>
     </open-files>
 </project-private>

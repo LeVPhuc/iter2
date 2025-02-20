@@ -34,39 +34,53 @@ public class GetListCourse extends HttpServlet {
   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
     CourseDao courseDao = new CourseDao();
+    // currentPage: trang hiện tại mặc định sẽ là 1.
+    // nếu người dùng chuyển trang thì sẽ truyền tới servlet và được gán vào biến currentPage
     int currentPage = 1;
-//    if (request.getParameter("currentPage") != null) {
-//      currentPage = Integer.parseInt(request.getParameter("currentPage"));
-//    }
+    if (request.getParameter("currentPage") != null) {
+      currentPage = Integer.parseInt(request.getParameter("currentPage"));
+    }
+    // textSearch: để filter theo tên khóa học như người dùng gõ vào thanh tìm kiếm
     String textSearch = request.getParameter("textSearch");
+    // coursecategory: filter theo danh mục môn học. mặc định sẽ là 0 <=> người dùng chưa filter
+    // nếu người dùng filter theo danh mục môn học thì sẽ gán vào biến coursecategory
     int coursecategory = 0;
     if (request.getParameter("coursecategory") != null) {
       coursecategory = Integer.parseInt(request.getParameter("coursecategory"));
     }
+    // hàm courseDao.getTotalRecord sẽ lấy ra tổng số lượng bản ghi của 1 table
+    // totalCourse: tổng số lượng bản ghi của bảng Courses
     int totalCourse = courseDao.getTotalRecord("select * from Courses");
+    // totalPage tổng số trang người dùng có thể thấy
+    // PAGE_SIZE số lượng khóa học trong 1 trang
     int totalPage;
+    // nếu totalCourse chia cho PAGE_SIZE bị dư thì totalPage phải + 1 còn không thì giữ nguyên
     if (totalCourse % PAGE_SIZE == 0) {
       totalPage = totalCourse / PAGE_SIZE;
     } else {
       totalPage = totalCourse / PAGE_SIZE + 1;
     }
+    // Lấy ra danh mục môn học
     String sqlCourseCategory = "select * from CoursesCategories";
     ResultSet rsCourseCategory = courseDao.getData(sqlCourseCategory);
+    // Câu lệnh SQL để lấy ra Courses mặc định có phân trang <=> khi người dùng chưa filter, tìm kiếm
+    // offset: số lượng bản ghi sẽ bị bỏ qua
+    // fetch: số lượng bản ghi lấy ra
     String sqlCourse = "select * from Courses order by id offset " + ((currentPage - 1) * PAGE_SIZE) + " rows fetch next " + PAGE_SIZE + " rows only";
     if (textSearch != null && coursecategory != 0) {
       sqlCourse = "select * from Courses "
-              + "where courseName like '%" + textSearch + "%' and categoryId = " + coursecategory + " "
-              + "order by id offset " + ((currentPage - 1) * PAGE_SIZE) + " rows fetch next" + PAGE_SIZE + " rows only";
+              + "where courseName like '%" + textSearch + "%' and categoryId = " + coursecategory
+              + "order by id offset " + ((currentPage - 1) * PAGE_SIZE) + " rows fetch next " + PAGE_SIZE + " rows only";
     }
     if (textSearch != null) {
       sqlCourse = "select * from Courses "
               + "where courseName like '%" + textSearch + "%' "
-              + "order by id offset " + ((currentPage - 1) * PAGE_SIZE) + " rows fetch next" + PAGE_SIZE + " rows only";
+              + "order by id offset " + ((currentPage - 1) * PAGE_SIZE) + " rows fetch next " + PAGE_SIZE + " rows only";
     }
     if (coursecategory != 0) {
       sqlCourse = "select * from Courses "
               + "where categoryId = " + coursecategory + " "
-              + "order by id offset " + ((currentPage - 1) * PAGE_SIZE) + " rows fetch next" + PAGE_SIZE + " rows only";
+              + "order by id offset " + ((currentPage - 1) * PAGE_SIZE) + " rows fetch next " + PAGE_SIZE + " rows only";
     }
     ResultSet rsCourse = courseDao.getData(sqlCourse);
     request.setAttribute("totalPage", totalPage);

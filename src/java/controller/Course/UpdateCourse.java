@@ -27,13 +27,23 @@ import models.Courses;
 public class UpdateCourse extends HttpServlet {
 
   private static final String UPLOAD_DIR = "WebPages/uploads";
+  // lý do lấy courseId ở doGet xog lại phải truyền ngược lại cho jsp
+  // để có thể set được courseId vào <input type="hidden" name="courseId" value="<%=courseId%>" /> <=> submit form có trường courseId
+  // nếu không truyền ngược lại thì khi submit form ở doPost sẽ không có id để thực hiện update
 
+  // luồng của update
+  // 1. Khi click vào btn Cập nhật ở màn list => gọi đến controller updateCourse với method get
+  // 2. ở hàm doGet sẽ lấy thông của Course theo id để bên jsp có thể fill thông của Course vào form
+  // 3.
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
+    // khi gọi 1 controller = 1 form có method get, bằng 1 đường dẫn
     CourseDao courseDao = new CourseDao();
     int courseId = Integer.parseInt(request.getParameter("courseId"));
+    // lấy ra course theo id
     Courses course = courseDao.getCourseByID(courseId);
+    // lấy ra danh mục môn học
     String sqlCourseCategory = "select * from CoursesCategories";
     ResultSet rsCourseCategory = courseDao.getData(sqlCourseCategory);
     request.setAttribute("rsCourseCategory", rsCourseCategory);
@@ -53,32 +63,38 @@ public class UpdateCourse extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
+    // khi gọi 1 controller = 1 form có method post,
     CourseDao courseDao = new CourseDao();
     int courseId = Integer.parseInt(request.getParameter("courseId"));
     String courseName = request.getParameter("courseName");
     String description = request.getParameter("description");
     int categoryId = Integer.parseInt(request.getParameter("categoryId"));
     int numberLesson = Integer.parseInt(request.getParameter("numberLesson"));
+    // xử lý upload file
+    // fileUrl để cho việc lưu đường của trường image
+    // mặc định ban đầu sẽ gán cho bằng request.getParameter("oldImage"); để nếu người dùng k update thì sẽ giữ lại đường dẫn cũ
+    String fileUrl = request.getParameter("oldImage");
     String uploadPath = getServletContext().getRealPath("/") + UPLOAD_DIR;
     File uploadDir = new File(uploadPath);
     if (!uploadDir.exists()) {
       uploadDir.mkdirs();
     }
     Part part = request.getPart("image");
-    String fileUrl = request.getParameter("oldImage");
     if (part != null && part.getSubmittedFileName() != null && !part.getSubmittedFileName().isEmpty()) {
       String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
       String filePath = uploadPath + File.separator + fileName;
       part.write(filePath);
       fileUrl = UPLOAD_DIR + "/" + fileName;
     }
-    int checkInsert = 0;
+    // checkUpdate để check xem câu lệnh update có được thực hiện thành công không
+    int checkUpdate = 0;
     Courses newCourse = new Courses(categoryId, 1, numberLesson, courseName, description, fileUrl);
-    checkInsert = courseDao.updateCourse(newCourse, courseId);
-    if (checkInsert > 0) {
+    // cái courseDao.updateCourse sẽ return về int vì khi chạy câu lệnh insert/update sẽ nhận được số lượng bản ghi thực hiện thành công
+    checkUpdate = courseDao.updateCourse(newCourse, courseId);
+    if (checkUpdate > 0) {
       response.sendRedirect("http://localhost:8080/SpSWP/getListCourse");
     } else {
-      request.setAttribute("message", "Thêm mới thất bại");
+      request.setAttribute("message", "Cập nhật thất bại");
       request.getRequestDispatcher("/update.jsp").forward(request, response);
     }
   }
